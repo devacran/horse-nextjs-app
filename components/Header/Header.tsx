@@ -24,7 +24,7 @@ const Header = () => {
       setModalOpen(true);
     }
   }, [count]);
-
+  console.log(count, visible);
   return (
     <div className="container">
       {isDead ? (
