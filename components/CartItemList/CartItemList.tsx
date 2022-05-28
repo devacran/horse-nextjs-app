@@ -57,7 +57,7 @@ const CartItemList = ({
         ),
       };
     });
-
+  console.log(items);
   return <Item.Group divided items={mapCartItemsToItems(items)} as="section" />;
 };
 
