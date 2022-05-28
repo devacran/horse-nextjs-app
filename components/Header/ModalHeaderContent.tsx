@@ -9,7 +9,7 @@ const Modal = () => {
       <Grid columns={2}>
         <Grid.Row verticalAlign={"middle"}>
           <Grid.Column width="5">
-            <PosMeMuero size="154px" />
+            <PosMeMuero />
           </Grid.Column>
           <Grid.Column width="11">
             <Header as="h2">Mataste al caballo</Header>
