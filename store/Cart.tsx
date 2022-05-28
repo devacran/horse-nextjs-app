@@ -19,7 +19,6 @@ const CartDispatchContext = React.createContext(
 
 const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(cartReducers, defaultState);
-
   return (
     <CartItemsContext.Provider value={state}>
       <CartDispatchContext.Provider value={dispatch}>
@@ -34,7 +33,6 @@ function cartReducers(
   { item, type, quantity: qtyToAdd = 1 }: CartAction
 ) {
   const existingCartItem = state[item.id];
-
   switch (type) {
     case "add": {
       if (existingCartItem != undefined) {
@@ -98,8 +96,6 @@ const getCartCount = (sum: number, item: CartItemType) => sum + item.quantity;
 export const useCart = () => {
   const itemsById = useContext(CartItemsContext);
   const items = Object.values(itemsById);
-  // Not familiar with Array.reduce? :)
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
   const count = items.reduce(getCartCount, 0);
   const subTotal = items.reduce(getCartSubTotal, 0);
 
