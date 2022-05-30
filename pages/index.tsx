@@ -1,24 +1,29 @@
 import { useEffect, useState } from "react";
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
 import Layout from "@components/Layout/Layout";
 import KawaiiHeader from "@components/Header/Header";
 import ProductList from "@components/ProductList/ProductList";
 import "../styles/Home.module.css";
 
-const Home: NextPage = () => {
-  const [products, setProducts] = useState<TProduct[]>([]);
-  useEffect(() => {
-    window
-      .fetch("/api/horse/all")
-      .then((response) => response.json())
-      .then((data) => setProducts(data.products));
-  }, []);
+export async function getServerSideProps() {
+  const data = await fetch("http://localhost:3001/api/horse/all")
+    .then((res) => res.json())
+    .then((data) => data);
+  return {
+    props: {
+      productList: data.products,
+    }, // will be passed to the page component as props
+  };
+}
+type IHomeProps = {
+  productList: TProduct[];
+};
+
+const Home: NextPage<IHomeProps> = ({ productList }: IHomeProps) => {
   return (
     <Layout>
       <KawaiiHeader />
-      <ProductList products={products} />
+      <ProductList products={productList} />
     </Layout>
   );
 };
